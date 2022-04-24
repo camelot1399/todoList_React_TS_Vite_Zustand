@@ -16,11 +16,11 @@ interface ToDoStore {
 
 export const useToDoStore = create<ToDoStore>((set, get) => ({
     tasks: [
-        {
-            id: '903283294776',
-            title: 'моя дфолтная таска',
-            createdAt: 9843872386
-        }
+        // {
+        //     id: '903283294776',
+        //     title: 'моя дфолтная таска',
+        //     createdAt: 9843872386
+        // }
     ],
     createTask: (title) => {
         const { tasks } = get();

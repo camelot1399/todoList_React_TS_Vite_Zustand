@@ -3,6 +3,7 @@ import styles from './index.module.scss';
 
 import { useToDoStore } from '../../data/stores/useToDoStore'
 import { InputPlus } from "../components/InputPlus";
+import { InputTask } from "../components/InputTask";
 
 export const App: React.FC = () => {
 
@@ -19,11 +20,6 @@ export const App: React.FC = () => {
         state.updateTask
     ])
 
-    useEffect(() => {
-        createTask('dfdsff');
-       
-    }, [])
-
     console.log('tasks', tasks);
 
     return ( 
@@ -38,7 +34,19 @@ export const App: React.FC = () => {
                     }}
                 />
             </section>
-            <section className={styles.article__section}></section>
+            <section className={styles.article__section}>
+                {!tasks.length && (<div>нет ни одной таски</div>)}
+
+                {tasks.map(task => 
+                    <InputTask 
+                        key={task.id}
+                        id={task.id}
+                        title={task.title}
+                        onDone={removeTask}
+                        onEdited={updateTask}
+                        onRemoved={removeTask}
+                    />)}
+            </section>
         </article>
     )
 }

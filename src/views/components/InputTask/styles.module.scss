@@ -1,0 +1,41 @@
+.inputTask {
+    display: grid;
+    grid-template-columns: 1fr 30px 30px;
+    background: rgba(1,1,1,0.1);
+    margin-bottom: 5px;
+    width: 500px;
+    padding-right: 10px;
+
+    & label {
+        display: grid;
+        grid-template-columns: 50px 1fr;
+        padding: 10px;
+        cursor: pointer;
+    }
+}
+.InputTaskCheckbox {
+    display: flex;
+    width: 20px;
+    height: 20px;
+}
+
+.inputTaskEdit,
+.inputTaskRemove {
+    cursor: pointer;
+    border: none;
+    margin-left: 10px;
+    background: none no-repeat center center;
+    width: 18px;
+    transition: all 0.5s;
+    &:hover {
+        opacity: 0.4;
+    }
+}
+
+.inputTaskRemove {
+    background-image: url(./images/remove.svg);
+}
+
+.inputTaskEdit {
+    background-image: url(./images/edit.svg);
+}
