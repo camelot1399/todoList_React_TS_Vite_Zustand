@@ -13,10 +13,14 @@ export const InputTask: React.FC<InputTaskProps> = ({
     id, 
     title, 
     onDone,
-    onRemoved
+    onRemoved,
+    onEdited
 }) => {
 
     const [checked, setChecked] = useState(false);
+    const [isEditMode, setIsEditMode] = useState(false);
+    const [value, setValue] = useState(title);
+
     return (
         <div className={styles.inputTask}>
             <label>
@@ -24,6 +28,7 @@ export const InputTask: React.FC<InputTaskProps> = ({
                     type="checkbox" 
                     checked={checked}
                     className={styles.InputTaskCheckbox}
+                    disabled={isEditMode}
                     onChange={e => {
                         setChecked(e.target.checked)
 
@@ -32,19 +37,43 @@ export const InputTask: React.FC<InputTaskProps> = ({
                         }
                     }}
                 />
-                <h3 className={styles.inputTaskTitle}>{title}</h3>
+                {isEditMode ? (
+                    <input 
+                        type='text'
+                        value={value}
+                        onChange={e => setValue(e.target.value)}
+                        className={styles.inputTaskTitleEdit}
+                    />
+                ) : (
+                    <h3 className={styles.inputTaskTitle}>{title}</h3>
+                )}
+                
             </label>
-            <button
-                className={styles.inputTaskEdit}
-                onClick={() => {
-                    onDone(id);
-                }}
-            />
+
+            {isEditMode ? (
+                <button
+                    className={styles.inputTaskOk}
+                    onClick={() => {
+                        onEdited(id, value)
+                        setIsEditMode(false);
+                    }}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            onEdited(id, value)
+                            setIsEditMode(false);
+                        }
+                    }}
+                >ок</button>
+            ) : (
+                <button
+                    className={styles.inputTaskEdit}
+                    onClick={() => setIsEditMode(true)}
+                />
+            )}
+            
             <button
                 className={styles.inputTaskRemove}
-                onClick={() => {
-                    onRemoved(id);
-                }}
+                onClick={() => onRemoved(id)}
             />
         </div>
     )
