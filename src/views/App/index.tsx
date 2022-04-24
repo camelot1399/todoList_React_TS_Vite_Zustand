@@ -30,7 +30,13 @@ export const App: React.FC = () => {
         <article className={styles.article}>
             <h1 className={styles.article__title}>To DO APP</h1>
             <section className={styles.article__section}>
-                <InputPlus />
+                <InputPlus 
+                    onAdd={(title) => {
+                        if (title) {
+                            createTask(title)
+                        }
+                    }}
+                />
             </section>
             <section className={styles.article__section}></section>
         </article>
